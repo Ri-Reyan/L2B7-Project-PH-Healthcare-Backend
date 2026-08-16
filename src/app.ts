@@ -8,6 +8,8 @@ import express, {
   type Response,
 } from "express";
 import httpStatus from "http-status";
+import { globalErrorHandler } from "./app/middleware/globalErrorHandler";
+import { notFound } from "./app/middleware/notFound";
 
 const app: Application = express();
 
@@ -55,5 +57,8 @@ app.get("/", async (req: Request, res: Response) => {
     message: "Welcome to PH Healthcare System Backend",
   });
 });
+
+app.use(globalErrorHandler);
+app.use(notFound);
 
 export default app;
